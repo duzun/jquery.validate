@@ -1,0 +1,19 @@
+{
+  "compileOnSave": false,
+  "declaration": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "es2015",
+    "outDir": ".",
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "files": [
+    "validate.d.ts",
+    "util.ts",
+    "validate.ts"
+  ]
+}

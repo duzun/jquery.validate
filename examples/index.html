@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Form validation example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <style>
+    body {
+      min-height: 100%;
+    }
+
+    form {
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .error-msg {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="form1">
+
+    <h1>Signup Form with validation</h1>
+
+    <div class="form-group">
+      <input class="form-control" type="text" name="firstname" minlength="4" maxlength="20" placeholder="First name" autofocus data-trim />
+      <span class="error-msg alert alert-danger"></span>
+    </div>
+
+    <div class="form-group">
+      <input class="form-control" type="text" name="lastname" required maxlength="20" placeholder="Last name" data-trim />
+    </div>
+
+    <div class="form-group">
+      <input class="form-control" type="email" name="email" minlength="5" required placeholder="* Email" />
+    </div>
+
+    <div class="form-group">
+      <input class="form-control" type="number" name="age" min="5" max="100" placeholder="Age" />
+      <!-- <input class="form-control" type="text" name="age" data-minval="5" data-maxval="100" placeholder="Age" /> -->
+    </div>
+
+    <div class="form-group">
+      <input class="form-control" type="password" value="" name="password" id="password" minlength="6" required placeholder="Password" />
+      <div id="about_passwd" style="display:none">
+        Good passwords are hard to guess. Use uncommon words or inside jokes,
+        non-standard uPPercasing, creative spelllling, and non-obvious numbers and symbols.
+      </div>
+    </div>
+
+    <div class="form-group" style="display:none">
+      <input class="form-control" type="password" value="" name="password2" id="password2" equalto="password" placeholder="Confirm Password">
+      <div class="placeholder" aria-hidden="true"
+        style="position: absolute; display: none; pointer-events: none; top: 0px; left: 0px; box-sizing: border-box; width: 100%; height: 100%; cursor: text; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0.5; background-color: transparent; zoom: 1;">
+        Confirm Master Password*</div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-success disabled" type="submit" name="signup" disabled value="1">
+        <span>Signup</span>
+      </button>
+      <button type="reset" class="btn btn-warning">Reset Form</button>
+    </div>
+  </form>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
+  <script src="../dist/validate.js" async></script>
+  <script>
+    $(function () {
+      let validCount = 0;
+      let invalidCount = 0;
+      const $form = $('#form1')
+        .on('valid:form', function (evt, opt) {
+          console.log(evt.type, opt);
+          ++validCount;
+        })
+        .on('invalid:form', function (evt, opt) {
+          console.log(evt.type, opt);
+          ++invalidCount;
+        })
+        .on('valid', function (evt, opt) {
+          console.log(evt.type, opt);
+        })
+        .on('invalid', function (evt, opt) {
+          console.log(evt.type, opt);
+        })
+        .validator({
+          fieldGroup: '.form-group',
+          hintElement: '.error-msg'
+        })
+        ;
+    });
+  </script>
+</body>
+
+</html>
